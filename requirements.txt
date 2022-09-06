@@ -1,0 +1,11 @@
+pandas
+numpy
+matplotlib
+notebook
+seaborn
+squarify
+networkx
+gapminder
+mlxtend
+PyYAML
+-e .
