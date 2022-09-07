@@ -1,43 +1,21 @@
-training_pipeline_config:
-  pipeline_name: housing
-  artifact_dir: artifact
+artifacts_config:
+  artifacts_dir: artifacts
 
 data_ingestion_config:
-  dataset_download_url: https://raw.githubusercontent.com/ageron/handson-ml/master/datasets/housing/housing.tgz
-  raw_data_dir: raw_data
-  tgz_download_dir: tgz_data
+  dataset_download_url: https://github.com/entbappy/Branching-tutorial/raw/master/Foodmart_dataset.zip
+  dataset_dir: dataset
   ingested_dir: ingested_data
-  ingested_train_dir: train
-  ingested_test_dir: test 
-
-
-
+  raw_data_dir: raw_data
 
 data_validation_config:
-  schema_dir: config
-  schema_file_name: schema.yaml
-  report_file_name: report.json
-  report_page_file_name: report.html
-
-data_transformation_config:
-  add_bedroom_per_room: true
-  transformed_dir: transformed_data
-  transformed_train_dir: train
-  transformed_test_dir: test
-  preprocessing_dir: preprocessed
-  preprocessed_object_file_name: preprocessed.pkl
-  
-model_trainer_config:
-  trained_model_dir: trained_model
-  model_file_name: model.pkl
-  base_accuracy: 0.6
-  model_config_dir: config
-  model_config_file_name: model.yaml
+  clean_data_dir: clean_data
+  serialized_objects_dir: serialized_objects
+  customer_csv_file: customer.csv
+  product_class_csv_file: product_class.csv
+  product_csv_file: product.csv
+  region_csv_file: region.csv
+  sales_csv_file: sales.csv
+  store_csv_file: store.csv
+  time_by_day_csv_file: time_by_day.csv
 
 
-model_evaluation_config:
-  model_evaluation_file_name: model_evaluation.yaml
-  
-
-model_pusher_config:
-  model_export_dir: saved_models
