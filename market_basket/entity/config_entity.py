@@ -13,4 +13,13 @@ DataValidationConfig = namedtuple("DataValidationConfig", ["clean_data_dir",
                                                          "sales_csv_file",
                                                          "store_csv_file",
                                                          "time_by_day_csv_file",
-                                                         "serialized_objects_dir"])     
+                                                         "serialized_objects_dir"])  
+
+DataTransformationConfig = namedtuple("DataTransformationConfig", ["clean_data_file_path",
+                                                                   "transformed_data_dir"])     
+
+
+
+ModelTrainerConfig = namedtuple("ModelTrainerConfig", ["transformed_data_file_dir",
+                                                      "trained_model_dir",
+                                                      "trained_model_name"])                                                                                                                            

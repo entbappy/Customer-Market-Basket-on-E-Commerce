@@ -19,3 +19,14 @@ data_validation_config:
   time_by_day_csv_file: time_by_day.csv
 
 
+data_transformation_config:
+  transformed_data_dir: transformed_data
+
+
+model_trainer_config:
+  trained_model_dir: trained_model
+  trained_model_name: model.pkl
+
+
+
+
