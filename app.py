@@ -2,8 +2,6 @@ import os
 import sys
 import pickle
 import streamlit as st
-import requests
-import numpy as np
 from market_basket.logger.log import logging
 from market_basket.exception.exception_handler import AppException
 from market_basket.config.configuration import AppConfiguration
