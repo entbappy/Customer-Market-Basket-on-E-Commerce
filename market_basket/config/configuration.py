@@ -3,7 +3,7 @@ import sys
 from market_basket.logger.log import logging
 from market_basket.utils.util import read_yaml_file
 from market_basket.exception.exception_handler import AppException
-from market_basket.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig
+from market_basket.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig, ModelRecommendationConfig
 from market_basket.constant import *
 
 
@@ -127,6 +127,31 @@ class AppConfiguration:
             )
 
             logging.info(f"Model Trainer Config: {response}")
+            return response
+
+        except Exception as e:
+            raise AppException(e, sys) from e
+
+
+    
+    def get_recommendation_config(self) -> ModelRecommendationConfig:
+        try:
+            model_trainer_config = self.configs_info['model_trainer_config']
+            data_validation_config = self.configs_info['data_validation_config']
+            trained_model_name = model_trainer_config['trained_model_name']
+            artifacts_dir = self.configs_info['artifacts_config']['artifacts_dir']
+            trained_model_dir = os.path.join(artifacts_dir, model_trainer_config['trained_model_dir'])
+            
+
+            list_of_products_serialized_objects = os.path.join(artifacts_dir, data_validation_config['serialized_objects_dir'], 'list_of_products.pkl')
+            trained_model_path = os.path.join(trained_model_dir,trained_model_name)
+          
+            response = ModelRecommendationConfig(
+                list_of_products_serialized_objects = list_of_products_serialized_objects,
+                trained_model_path = trained_model_path
+            )
+
+            logging.info(f"Model Recommendation Config: {response}")
             return response
 
         except Exception as e:

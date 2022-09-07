@@ -8,4 +8,5 @@ networkx
 gapminder
 mlxtend
 PyYAML
+streamlit
 -e .

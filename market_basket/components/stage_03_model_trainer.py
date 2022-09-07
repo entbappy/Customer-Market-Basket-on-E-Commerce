@@ -1,6 +1,7 @@
 import os
 import sys
 import pickle
+import numpy as np
 from market_basket.logger.log import logging
 from market_basket.exception.exception_handler import AppException
 from market_basket.config.configuration import AppConfiguration
@@ -12,6 +13,7 @@ class ModelTrainer:
     def __init__(self, app_config = AppConfiguration()):
         try:
             self.model_trainer_config = app_config.get_model_trainer_config()
+            self.data_validation_config= app_config.get_data_validation_config()
         except Exception as e:
             raise AppException(e, sys) from e
 
@@ -35,6 +37,14 @@ class ModelTrainer:
             # Saving the training model metrics
             fpgrowth_rules.to_csv(os.path.join(self.model_trainer_config.trained_model_dir,'metrics.csv'), index = False)
             logging.info(f"Saving metrics to {self.model_trainer_config.trained_model_dir}")
+            
+
+            fpgrowth_rules['antecedents'] = fpgrowth_rules['antecedents'].apply(lambda x: list(x)[0]).astype("unicode")
+            list_of_products = fpgrowth_rules['antecedents']
+            #saving list_of_products objects for web app
+            os.makedirs(self.data_validation_config.serialized_objects_dir, exist_ok=True)
+            pickle.dump(np.array(list_of_products), open(os.path.join(self.data_validation_config.serialized_objects_dir, "list_of_products.pkl"),'wb'))
+            logging.info(f"Saved list_of_products serialization object to {self.data_validation_config.serialized_objects_dir}")
             
         except Exception as e:
             raise AppException(e, sys) from e

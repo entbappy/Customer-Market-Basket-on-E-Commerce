@@ -83,17 +83,12 @@ class DataValidation:
             product_name=df[df.columns[cols]]
             logging.info(f" Shape of the clean data after preprocessing: {product_name.shape}")
 
-            list_of_products = np.array(product_name['product_name'])
-
             # Saving the cleaned data for transformation
             os.makedirs(self.data_validation_config.clean_data_dir, exist_ok=True)
             product_name.to_csv(os.path.join(self.data_validation_config.clean_data_dir,'clean_data.csv'), index = False)
             logging.info(f"Saved cleaned data to {self.data_validation_config.clean_data_dir}")
 
-            #saving list_of_products objects for web app
-            os.makedirs(self.data_validation_config.serialized_objects_dir, exist_ok=True)
-            pickle.dump(list_of_products, open(os.path.join(self.data_validation_config.serialized_objects_dir, "list_of_products.pkl"),'wb'))
-            logging.info(f"Saved list_of_products serialization object to {self.data_validation_config.serialized_objects_dir}")
+           
 
         except Exception as e:
             raise AppException(e, sys) from e
